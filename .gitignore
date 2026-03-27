@@ -1,0 +1,6 @@
+## MATLAB / Simulink
+
+*.asv
+*.slxc
+
+data/

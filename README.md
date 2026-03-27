@@ -22,7 +22,7 @@ The dataset is established using a power system model in **MATLAB/Simulink**. Th
 **The simulation accounts for:**
 * **Fault Types:** 11 distinct states (10 short-circuit types + 1 Normal state).
 * **Inception Angle:** Range of $0^\circ$ to $330^\circ$ to capture transient variety.
-* **Fault Resistance ($R_f$):** Multiple values to simulate high and low impedance faults $[0\Omega, 0.001\Omega, 1\Omega, 10\Omega, 50\Omega, 100\Omega]$.
+* **Fault Resistance ($R_f$):** Multiple values to simulate high and low impedance faults $[0.001\Omega, 1\Omega, 10\Omega, 50\Omega, 100\Omega]$.
 * **Fault Location:** Systematic intervals (1 km to 300 km) along the line for precise localization data.
 
 ### 2. The Hybrid Framework (Planned)
@@ -35,8 +35,8 @@ The proposed architecture follows a sequential feature-processing pipeline:
 
 ## Project Status: Work in Progress
 
-- [ ] Transmission Line Modeling in Simulink
-- [ ] Automated Data Generation Script
+- [x] Transmission Line Modeling in Simulink
+- [x] Automated Data Generation Script
 - [ ] Data Conversion (.mat to .npy)
 - [ ] Data Preprocessing and Normalization
 - [ ] CNN-LSTM Model Architecture Design
