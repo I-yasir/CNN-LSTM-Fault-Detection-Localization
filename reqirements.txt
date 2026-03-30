@@ -1,0 +1,8 @@
+python >= 3.8
+numpy
+pandas
+os
+scikit-learn
+matplotlib
+pyyaml
+scipy
