@@ -37,8 +37,8 @@ The proposed architecture follows a sequential feature-processing pipeline:
 
 - [x] Transmission Line Modeling in Simulink
 - [x] Automated Data Generation Script
-- [ ] Data Conversion (.mat to .npy)
-- [ ] Data Preprocessing and Normalization
+- [x] Data Conversion (.mat to .npy)
+- [x] Data Preprocessing and Normalization
 - [ ] CNN-LSTM Model Architecture Design
 - [ ] Hyperparameter Tuning and Optimization
 - [ ] Model Training and Evaluation

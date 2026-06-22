@@ -1,5 +1,2 @@
-
 path: 
-  raw_data: 'data/raw/'
-  collected_data: 'data/processed/collected_fault_data.npz'
-  processed_data: 'data/processed/processed_fault_data.npz'
+  raw_data: 'data/raw/transmission_fault_dataset.h5'
