@@ -1,2 +1,249 @@
-path: 
-  raw_data: 'data/raw/transmission_fault_dataset.h5'
+# =============================================================================
+# Project Configuration
+# Fault Classification & Localization using 1D CNN-LSTM
+# =============================================================================
+
+project:
+  name: "Fault Detection and Localization"
+  version: "1.0.0"
+  seed: 42
+  device: "auto"          # auto | cpu | cuda
+  num_workers: 4
+  pin_memory: true
+  deterministic: true
+  benchmark: false
+  
+# =============================================================================
+# Dataset
+# =============================================================================
+
+dataset:
+
+  # HDF5 dataset
+  file: "data/raw/dataset.h5"
+
+  # Dataset keys inside HDF5
+  keys:
+    signals: "signals"
+    fault_class: "fault_class"
+    fault_location: "fault_location"
+
+  # Signal properties
+  signal_length: 2001
+  num_channels: 6
+
+  # Labels
+  num_classes: 11
+
+  location:
+    minimum: -1.0
+    maximum: 100.0
+
+# =============================================================================
+# Dataset Split
+# =============================================================================
+
+split:
+
+  train: 0.70
+  validation: 0.15
+  test: 0.15
+
+  shuffle: true
+
+  save_path: "data/processed/split_indices.npz"
+
+# =============================================================================
+# Normalization
+# =============================================================================
+
+normalization:
+
+  method: "zscore"
+
+  save_path: "data/processed/normalization.npz"
+
+# =============================================================================
+# DataLoader
+# =============================================================================
+
+dataloader:
+
+  batch_size: 64
+
+  shuffle_train: true
+
+  shuffle_validation: false
+
+  shuffle_test: false
+
+  drop_last_train: true
+
+  persistent_workers: auto
+
+  prefetch_factor: 2
+
+# =============================================================================
+# Model
+# =============================================================================
+
+model:
+
+  name: "CNN_LSTM"
+
+  cnn:
+
+    channels: [32, 64, 128]
+
+    kernel_sizes: [7, 5, 3]
+
+    strides: [1, 1, 1]
+
+    paddings: [3, 2, 1]
+
+    dropout: 0.30
+
+  lstm:
+
+    hidden_size: 128
+
+    num_layers: 2
+
+    bidirectional: true
+
+    dropout: 0.30
+
+  classifier:
+
+    hidden_dim: 128
+
+    dropout: 0.30
+
+  localizer:
+
+    hidden_dim: 128
+
+    dropout: 0.30
+
+# =============================================================================
+# Training
+# =============================================================================
+
+training:
+
+  epochs: 100
+
+  learning_rate: 0.001
+
+  weight_decay: 0.0001
+
+  gradient_clip: 1.0
+
+  mixed_precision: true
+
+  early_stopping:
+
+    enabled: true
+
+    patience: 15
+
+
+    monitor: f1
+
+    mode: max
+
+    min_delta: 0.0001
+
+  loss:
+
+    classification_weight: 1.0
+
+    localization_weight: 0.5
+
+    no_fault_class: 0
+
+checkpoint:
+  directory: "outputs/checkpoints"
+  monitor: f1
+  mode: max
+
+# =============================================================================
+# Logging
+# =============================================================================
+
+logging:
+
+  directory: "outputs/logs"
+
+  level: "INFO"
+
+  tensorboard: true
+
+  csv: true
+
+# =============================================================================
+# Evaluation
+# =============================================================================
+
+evaluation:
+
+  classification_metrics:
+
+    - accuracy
+    - precision
+    - recall
+    - f1
+
+  localization_metrics:
+
+    - mae
+    - rmse
+    - r2
+
+# =============================================================================
+# Reports
+# =============================================================================
+
+report:
+
+  directory: "outputs/reports"
+
+  save_predictions: true
+
+  save_confusion_matrix: true
+
+  save_figures: true
+
+  save_history: true
+
+# =============================================================================
+# Figures
+# =============================================================================
+
+figures:
+
+  directory: "outputs/figures"
+
+  dpi: 300
+
+  format: "png"
+
+# =============================================================================
+# Output Files
+# =============================================================================
+
+outputs:
+
+  predictions: "outputs/predictions"
+
+  metrics: "outputs/reports/metrics.csv"
+
+  history: "outputs/reports/history.json"
+
+  report: "outputs/reports/report.md"
+
+paths:
+  history: outputs/history.json
+  checkpoints: outputs/checkpoints
+  reports: outputs/reports
+  figures: outputs/figures

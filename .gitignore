@@ -4,3 +4,9 @@
 *.slxc
 
 data/
+
+## Python
+venv/
+
+output/
+
