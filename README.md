@@ -39,13 +39,13 @@ The proposed architecture follows a sequential feature-processing pipeline:
 - [x] Automated Data Generation Script
 - [x] Data Conversion (.mat to .npy)
 - [x] Data Preprocessing and Normalization
-- [ ] CNN-LSTM Model Architecture Design
-- [ ] Hyperparameter Tuning and Optimization
-- [ ] Model Training and Evaluation
-- [ ] Performance Analysis and Visualization
+- [x] CNN-LSTM Model Architecture Design
+- [x] Hyperparameter Tuning and Optimization
+- [x] Model Training and Evaluation
+- [x] Performance Analysis and Visualization
 
 ## Tech Stack
 * **Simulation:** MATLAB, Simulink, Simscape Electrical
 * **Deep Learning:** Python, TensorFlow, Keras, NumPy
-* **Data Handling:** Pandas, SciPy (for `.mat` parsing)
+* **Data Handling:** Numpy, Scipy, hd5py
 * **Visualization:** Matplotlib, Seaborn

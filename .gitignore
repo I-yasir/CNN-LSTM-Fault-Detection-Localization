@@ -10,3 +10,8 @@ venv/
 
 output/
 
+__pycache__/
+
+reports/
+
+models/
