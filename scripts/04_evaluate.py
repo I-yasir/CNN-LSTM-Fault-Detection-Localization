@@ -96,13 +96,12 @@ def main():
         f.write(classification_report(y_true, y_pred, target_names=class_names, digits=4) + "\n\n")
         
         f.write("--- 2. Localization Performance (Faults Only) ---\n")
-        f.write(f"Mean Absolute Error (MAE):       {mae:.4f} km\n")
-        f.write(f"Root Mean Squared Error (RMSE):  {rmse:.4f} km\n")
+        # Fault locations are stored as a percentage of the line length, so MAE and RMSE are in
+        # percentage points. Convert to km using the line length from the config.
+        line_km = config['system']['line_length_km']
+        f.write(f"Mean Absolute Error (MAE):       {mae:.4f} % of line length ({mae / 100 * line_km:.2f} km)\n")
+        f.write(f"Root Mean Squared Error (RMSE):  {rmse:.4f} % of line length ({rmse / 100 * line_km:.2f} km)\n")
         f.write(f"Coefficient of Determination (R2): {r2:.4f}\n")
-        
-        if config['system']['line_length_km'] > 0:
-            error_percent = (mae / config['system']['line_length_km']) * 100
-            f.write(f"Average Relative Error (%):      {error_percent:.4f} %\n")
 
     # 2. SNR Evaluation (Optional robustness check)
     if os.path.exists(config['paths']['snr_data']):

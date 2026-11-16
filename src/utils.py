@@ -64,7 +64,7 @@ def plot_confusion_matrix(y_true, y_pred, classes, filepath, normalize=False):
 def plot_localization_scatter(y_true, y_pred, filepath, line_length):
     plt.figure(figsize=(8, 8))
     plt.scatter(y_true, y_pred, alpha=0.4, color='crimson', edgecolors='none')
-    plt.plot([0, line_length], [0, line_length], color='black', linestyle='--', lw=2)
+    plt.plot([0, 100], [0, 100], color='black', linestyle='--', lw=2)  # ideal: predicted = true (both in % of line length)
     plt.xlim([0, 100])
     plt.ylim([0, 100])
     plt.xlabel('True Fault Location (% Line Length)')
